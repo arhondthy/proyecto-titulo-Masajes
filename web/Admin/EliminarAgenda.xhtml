@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EliminarAgendaDlg" widgetVar="EliminaDialog" modal="true" resizable="false" appendTo="@(body)" header="Eliminar agenda" closable="false">
+            <h:form id="CompramasajeEditForm">
+                <h:panelGroup id="display">
+                    <h2>Esta seguro que desea cambiar el estado a terminado?"</h2>
+                    <p:panelGrid columns="2" >
+
+                        <h:outputText value="Cambie de estado"/>
+                        <p:selectOneRadio id="compraEstado" value="#{compramasajeController.estado}" required="true" requiredMessage="Debe ingresar nuevo estado">
+
+
+                            <f:selectItem itemValue="Terminada" itemLabel="Terminada"/>
+                        </p:selectOneRadio>
+
+                        <h:outputText value="Califique su atencion"/>
+                        <p:rating value="#{compramasajeController.rating}" cancel="false">
+                            <p:ajax event="rate" listener="#{rating.onrate}" update=":growl" />
+                        </p:rating>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{compramasajeController.editar()}" value="editar" update="display,:CompramasajeListForm ,:growl" oncomplete="handleSubmit(args, 'CompramasajeEditEstadoDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CompramasajeEditEstadoDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

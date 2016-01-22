@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ComunasprofesionalCreateDlg" widgetVar="ComunasprofesionalCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateComunasprofesionalTitle}">
+            <h:form id="ComunasprofesionalCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{comunasprofesionalController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateComunasprofesionalLabel_idComupro}" for="idComupro" />
+                        <p:inputText id="idComupro" value="#{comunasprofesionalController.selected.idComupro}" title="#{bundle.CreateComunasprofesionalTitle_idComupro}" required="true" requiredMessage="#{bundle.CreateComunasprofesionalRequiredMessage_idComupro}"/>
+                        <p:outputLabel value="#{bundle.CreateComunasprofesionalLabel_comuproComu}" for="comuproComu" />
+                        <p:selectOneMenu id="comuproComu" value="#{comunasprofesionalController.selected.comuproComu}" required="true" requiredMessage="#{bundle.EditComunasprofesionalRequiredMessage_comuproComu}">
+                            <f:selectItems value="#{comunaController.itemsAvailableSelectOne}"
+                                           var="comuproComuItem"
+                                           itemValue="#{comuproComuItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateComunasprofesionalLabel_comuproProid}" for="comuproProid" />
+                        <p:selectOneMenu id="comuproProid" value="#{comunasprofesionalController.selected.comuproProid}" required="true" requiredMessage="#{bundle.EditComunasprofesionalRequiredMessage_comuproProid}">
+                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                           var="comuproProidItem"
+                                           itemValue="#{comuproProidItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{comunasprofesionalController.create}" value="#{bundle.Save}" update="display,:ComunasprofesionalListForm:datalist,:growl" oncomplete="handleSubmit(args,'ComunasprofesionalCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ComunasprofesionalCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

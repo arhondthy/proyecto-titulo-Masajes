@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./../template/layoutMenu.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAgendacanceladaTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="AgendacanceladaListForm">
+                <p:panel header="#{bundle.ListAgendacanceladaTitle}">
+                    <p:dataTable id="datalist" value="#{agendacanceladaController.canceladas}" var="item"
+                                 paginator="true" rows="10">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id agenda cancelada"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cancelada.ageCanComId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre de cliente"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cancelada.ageCanComCliId.usuNom}"/>
+                            <h:outputText value="  "/>
+                            <h:outputText value="#{item.cancelada.ageCanComCliId.usuApe}"/>
+                        </p:column>
+                       
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Agenda"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaAgendada}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cancelada.ageCanComEst}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tipo de Masaje"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cancelada.ageCanComTipMas.tipMasNom}"/>
+                        </p:column>
+                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Costo del masaje"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cancelada.ageCanComCos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Profesional"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cancelada.ageCanComPro.usuNom}"/>
+                            <h:outputText value="  "/>
+                            <h:outputText value="#{item.cancelada.ageCanComPro.usuApe}"/>
+                        </p:column>
+                       
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AgendacanceladaCreateDlg" widgetVar="AgendacanceladaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAgendacanceladaTitle}">
+            <h:form id="AgendacanceladaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{agendacanceladaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAgendacanceladaLabel_ageCanId}" for="ageCanId" />
+                        <p:inputText id="ageCanId" value="#{agendacanceladaController.selected.ageCanId}" title="#{bundle.CreateAgendacanceladaTitle_ageCanId}" required="true" requiredMessage="#{bundle.CreateAgendacanceladaRequiredMessage_ageCanId}"/>
+                        <p:outputLabel value="#{bundle.CreateAgendacanceladaLabel_ageCanComId}" for="ageCanComId" />
+                        <p:inputText id="ageCanComId" value="#{agendacanceladaController.selected.ageCanComId}" title="#{bundle.CreateAgendacanceladaTitle_ageCanComId}" required="true" requiredMessage="#{bundle.CreateAgendacanceladaRequiredMessage_ageCanComId}"/>
+                        <p:outputLabel value="#{bundle.CreateAgendacanceladaLabel_ageCanComCliId}" for="ageCanComCliId" />
+                        <p:inputText id="ageCanComCliId" value="#{agendacanceladaController.selected.ageCanComCliId}" title="#{bundle.CreateAgendacanceladaTitle_ageCanComCliId}" required="true" requiredMessage="#{bundle.CreateAgendacanceladaRequiredMessage_ageCanComCliId}"/>
+                        <p:outputLabel value="#{bundle.CreateAgendacanceladaLabel_ageCanComCos}" for="ageCanComCos" />
+                        <p:inputText id="ageCanComCos" value="#{agendacanceladaController.selected.ageCanComCos}" title="#{bundle.CreateAgendacanceladaTitle_ageCanComCos}" required="true" requiredMessage="#{bundle.CreateAgendacanceladaRequiredMessage_ageCanComCos}"/>
+                        <p:outputLabel value="#{bundle.CreateAgendacanceladaLabel_ageCanComHor}" for="ageCanComHor" />
+                        <p:calendar id="ageCanComHor" pattern="MM/dd/yyyy HH:mm:ss" value="#{agendacanceladaController.selected.ageCanComHor}" title="#{bundle.EditAgendacanceladaTitle_ageCanComHor}" required="true" requiredMessage="#{bundle.EditAgendacanceladaRequiredMessage_ageCanComHor}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAgendacanceladaLabel_ageCanComEst}" for="ageCanComEst" />
+                        <p:inputText id="ageCanComEst" value="#{agendacanceladaController.selected.ageCanComEst}" title="#{bundle.CreateAgendacanceladaTitle_ageCanComEst}" required="true" requiredMessage="#{bundle.CreateAgendacanceladaRequiredMessage_ageCanComEst}"/>
+                        <p:outputLabel value="Tipo de masaje" for="comMasTipMasNom" />
+                        <p:selectOneMenu id="comMasTipMasNom" value="#{agendacanceladaController.selected.ageCanComTipMas}" required="true" requiredMessage="#{bundle.EditCompramasajeRequiredMessage_comMasTipMasNom}">
+                            <f:selectItems value="#{tipomasajeController.itemsAvailableSelectOne}"
+                                           var="comMasTipMasNomItem"
+                                           itemValue="#{comMasTipMasNomItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCompramasajeLabel_comMasProId}" for="comMasProId" />
+                        <p:selectOneMenu id="comMasProId" value="#{agendacanceladaController.selected.ageCanComPro}" required="true" requiredMessage="#{bundle.EditCompramasajeRequiredMessage_comMasProId}">
+                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                           var="comMasProIdItem"
+                                           itemValue="#{comMasProIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{agendacanceladaController.create}" value="#{bundle.Save}" update="display,:AgendacanceladaListForm:datalist,:growl" oncomplete="handleSubmit(args,'AgendacanceladaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AgendacanceladaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

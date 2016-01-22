@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layoutMenu.xhtml">
+
+            <ui:define name="body">
+                <h2>Mis Masajes </h2>
+                <p:growl id="msgs" showDetail="true" />
+                <h:form id="AgendaGlobalListForm">
+                    <p:tabView orientation="left">
+                        <p:ajax event="tabChange" listener="#{vistaTabs.CambioTab}" update=":AgendaGlobalListForm :msgs"/>
+                        <p:ajax event="tabClose" listener="#{vistaTabs.CierreTab}" update=":AgendaGlobalListForm :msgs"/>
+                        <p:tab title="Agendadas">
+
+                            <p:dataTable id="datalistAgendadas" value="#{compramasajeController.allMasajesAgendado}" var="itemAgendada"
+                                         emptyMessage="#{bundle.tablaVacia}"
+                                         paginator="true"
+                                         rowKey="#{itemAgendada.listaMasajes.comMasId}"
+                                         rows="10"
+                                         filteredValue=""
+                                         >
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Masajes Agendados"/>
+                                    </f:facet>
+                                    <p:panel>
+                                        <br>  <h:outputText value="Id: "/>
+                                            <h:outputText value="#{itemAgendada.listaMasajes.comMasId}"/></br>
+                                        <br>  <h:outputText value="Nombre Profesional: "/>
+                                            <p:outputLabel value="#{itemAgendada.listaMasajes.comMasProId.usuNom} #{itemAgendada.listaMasajes.comMasProId.usuApe}"/></br>
+                                        <br>  <h:outputText value="Nombre Cliente: "/>
+                                            <p:outputLabel value="#{itemAgendada.listaMasajes.comMasCliId.usuNom} #{itemAgendada.listaMasajes.comMasCliId.usuApe}"/></br>
+                                        <br>  <h:outputText value="Nombre Masaje: "/>
+                                            <h:outputText value="#{itemAgendada.listaMasajes.comMasTipMasNom.tipMasNom}"/></br>
+                                        <br> <h:outputText value="Costo Masaje:  "/>
+                                            <h:outputText value="#{itemAgendada.listaMasajes.comMasCos}"/></br>
+                                        <br>  <h:outputText value="Fecha agendada:  "/>
+                                            <h:outputText value="#{itemAgendada.fechaMasaje}"/>
+                                        </br>
+                                        <br> <p:commandButton value="eliminar" actionListener="#{compramasajeController.eliminar(itemAgendada.listaMasajes)}" update=":msgs,datalistAgendadas"/>
+                                            <p:commandButton  icon="ui-icon-pencil" value="Editar Estado" actionListener="#{compramasajeController.cargarEditar(itemAgendada.listaMasajes)}" /> </br>
+                                    </p:panel>
+                                </p:column>
+
+                            </p:dataTable>
+
+
+                        </p:tab>
+                        <p:tab title="En Curso">
+                            <p:panel>
+                                <p:dataTable id="datalistEnCurso" value="#{compramasajeController.allMasajesEnCurso}" var="itemEnCurso"
+                                             emptyMessage="#{bundle.tablaVacia}"
+                                             paginator="true"
+                                             rowKey="#{itemEnCurso.listaMasajes.comMasId}"
+                                             rows="10"
+                                             >
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Masajes Agendados"/>
+                                        </f:facet>
+                                        <p:panel>
+                                            <br>  <h:outputText value="Id: "/>
+                                                <h:outputText value="#{itemEnCurso.listaMasajes.comMasId}"/></br>
+                                            <br>  <h:outputText value="Nombre Profesional: "/>
+                                                <p:outputLabel value="#{itemEnCurso.listaMasajes.comMasProId.usuNom} #{itemEnCurso.listaMasajes.comMasProId.usuApe}"/></br>
+                                            <br>  <h:outputText value="Nombre Cliente: "/>
+                                                <p:outputLabel value="#{itemEnCurso.listaMasajes.comMasCliId.usuNom} #{itemEnCurso.listaMasajes.comMasCliId.usuApe}"/></br>
+                                            <br>  <h:outputText value="Nombre Masaje: "/>
+                                                <h:outputText value="#{itemEnCurso.listaMasajes.comMasTipMasNom.tipMasNom}"/></br>
+                                            <br> <h:outputText value="Costo Masaje:  "/>
+                                                <h:outputText value="#{itemEnCurso.listaMasajes.comMasCos}"/></br>
+                                            <br>  <h:outputText value="Fecha agendada:  "/>
+                                                <h:outputText value="#{itemEnCurso.fechaMasaje}"/>
+                                            </br>
+
+                                        </p:panel>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </p:panel> 
+                        </p:tab>
+                        <p:tab title="Atendidas">
+                            <p:panel>
+                                <p:dataTable id="datalistAtendidas" value="#{compramasajeController.allMasajesAtendidos}" var="itemAtendido"
+                                             emptyMessage="#{bundle.tablaVacia}"
+                                             paginator="true"
+                                             rowKey="#{itemAtendido.listaMasajes.comMasId}"
+                                             rows="10"
+
+                                             >
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Masajes Atendidos"/>
+                                        </f:facet>
+                                        <p:panel>
+                                            <br>  <h:outputText value="Id: "/>
+                                                <h:outputText value="#{itemAtendido.listaMasajes.comMasId}"/></br>
+                                            <br>   <h:outputText value="Nombre Profesional:  "/>
+                                                <p:outputLabel value="#{itemAtendido.listaMasajes.comMasProId.usuNom} #{itemAtendido.listaMasajes.comMasProId.usuApe}"/></br>
+                                            <br>  <h:outputText value="Nombre Cliente: "/>
+                                                <p:outputLabel value="#{itemAtendido.listaMasajes.comMasCliId.usuNom} #{itemAtendido.listaMasajes.comMasCliId.usuApe}"/></br>
+                                            <br>  <h:outputText value="Nombre Masaje:  "/>
+                                                <h:outputText value="#{itemAtendido.listaMasajes.comMasTipMasNom.tipMasNom}"/></br>
+                                            <br>   <h:outputText value="Costo Masaje:  "/>
+                                                <h:outputText value="#{itemAtendido.listaMasajes.comMasCos}"/></br>
+                                            <br>   <h:outputText value="Fecha agendada:  "/>
+                                                <h:outputText value="#{itemAtendido.fechaMasaje}"/>
+                                            </br>
+
+                                        </p:panel>
+
+
+                                    </p:column>
+
+                                </p:dataTable>
+                            </p:panel>
+                        </p:tab>
+                        <p:tab title="Terminadas">
+                            <p:panel>
+                                <p:dataTable id="datalistTerminadas" value="#{compramasajeController.allMasajesTerminado}" var="itemTerminada"
+                                             emptyMessage="#{bundle.tablaVacia}"
+                                             paginator="true"
+                                             rowKey="#{itemTerminada.listaMasajes.comMasId}"
+                                             rows="10"
+                                             >
+                                    <p:column >
+                                        <f:facet name="header">
+                                            <h:outputText value="Masajes Terminados"/>
+                                        </f:facet>
+                                        <p:panel>
+                                            <br>  <h:outputText value="Id: "/>
+                                                <h:outputText value="#{itemTerminada.listaMasajes.comMasId}"/></br>
+                                            <br>
+                                                <h:outputText value="Nombre Profesional:  "/>
+                                                <p:outputLabel value="#{itemTerminada.listaMasajes.comMasProId.usuNom} #{itemTerminada.listaMasajes.comMasProId.usuApe}"/></br>
+                                            <br>  <h:outputText value="Nombre Cliente: "/>
+                                                <p:outputLabel value="#{itemTerminada.listaMasajes.comMasCliId.usuNom} #{itemTerminada.listaMasajes.comMasCliId.usuApe}"/></br>
+                                            <br>  <h:outputText value="Nombre Masaje:  "/>
+                                                <h:outputText value="#{itemTerminada.listaMasajes.comMasTipMasNom.tipMasNom}"/></br>
+                                            <br>  <h:outputText value="Costo Masaje:  "/>
+                                                <h:outputText value="#{itemTerminada.listaMasajes.comMasCos}"/></br>
+                                            <br>  <h:outputText value="Fecha agendada:  "/>
+                                                <h:outputText value="#{itemTerminada.fechaMasaje}"/>
+
+                                            </br>
+
+                                        </p:panel>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:panel>
+                        </p:tab>
+                        <p:tab title="Eliminadas">
+                            <p:panel>
+                                <p:dataTable id="datalistEliminadas" value="#{agendacanceladaController.canceladas}" var="itemEliminada"
+                                             emptyMessage="#{bundle.tablaVacia}"
+                                             paginator="true"
+                                             rowKey="#{itemEliminada.cancelada.ageCanId}"
+                                             rows="10"
+                                             >
+                                    <p:column >
+                                        <f:facet name="header">
+                                            <h:outputText value="Masajes Terminados"/>
+                                        </f:facet>
+                                        <p:panel>
+                                            <br>  <h:outputText value="Id: "/>
+                                                <h:outputText value="#{itemEliminada.cancelada.ageCanComId}"/></br>
+                                            <br>
+                                                <h:outputText value="Nombre Profesional:  "/>
+                                                <p:outputLabel value="#{itemEliminada.cancelada.ageCanComPro.usuNom} #{itemEliminada.cancelada.ageCanComPro.usuApe}"/></br>
+                                            <br>
+                                                <h:outputText value="Nombre Paciente  "/>
+                                                <p:outputLabel value="#{itemEliminada.cancelada.ageCanComCliId.usuNom} #{itemEliminada.cancelada.ageCanComCliId.usuApe}"/></br>
+                                            <br>  <h:outputText value="Nombre Masaje:  "/>
+                                                <h:outputText value="#{itemEliminada.cancelada.ageCanComTipMas.tipMasNom}"/></br>
+                                            <br>  <h:outputText value="Costo Masaje:  "/>
+                                                <h:outputText value="#{itemEliminada.cancelada.ageCanComCos}"/></br>
+                                            <br>  <h:outputText value="Fecha agendada:  "/>
+                                                <h:outputText value="#{itemEliminada.fechaAgendada}"/>
+
+                                            </br>
+                                            <br>  <h:outputText value="Cancelada por usuario:  #{itemEliminada.cancelada.ageCanComUsuCanId.usuNom}  #{itemEliminada.cancelada.ageCanComUsuCanId.usuApe}"/>
+
+                                            </br>
+                                            <br>  <h:outputText value="Tipo de usuario que cancelo:  "/>
+                                                <h:outputText value="#{itemEliminada.cancelada.ageCanComUsuCanId.usuTipUsuId.tipUsuNom}"/>
+
+                                            </br>
+
+                                        </p:panel>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:panel>
+                        </p:tab>
+                    </p:tabView>
+                </h:form>
+                <ui:include src="EditarAgendas.xhtml"/>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

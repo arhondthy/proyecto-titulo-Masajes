@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipomasajeEditDlg" widgetVar="TipomasajeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTipomasajeTitle}">
+            <h:form id="TipomasajeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipomasajeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTipomasajeLabel_tipMasNom}" for="tipMasNom" />
+                        <p:inputText id="tipMasNom" value="#{tipomasajeController.selected.tipMasNom}" title="#{bundle.EditTipomasajeTitle_tipMasNom}" required="true" requiredMessage="#{bundle.EditTipomasajeRequiredMessage_tipMasNom}"/>
+                        <p:outputLabel value="#{bundle.EditTipomasajeLabel_tipMasCos}" for="tipMasCos" />
+                        <p:inputText id="tipMasCos" value="#{tipomasajeController.selected.tipMasCos}" title="#{bundle.EditTipomasajeTitle_tipMasCos}" required="true" requiredMessage="#{bundle.EditTipomasajeRequiredMessage_tipMasCos}"/>
+                        <p:outputLabel value="#{bundle.EditTipomasajeLabel_tipMasDes}" for="tipMasDes" />
+                        <p:inputTextarea id="tipMasDes"  maxlength="400" value="#{tipomasajeController.selected.tipMasDes}" title="#{bundle.EditTipomasajeTitle_tipMasDes}" required="true" requiredMessage="#{bundle.EditTipomasajeRequiredMessage_tipMasDes}"/>
+                        <p:outputLabel value="#{bundle.EditTipomasajeLabel_tipMasEst}" for="tipMasEst" />
+                        <p:selectOneMenu id="tipMasEst" value="#{tipomasajeController.selected.tipMasEst}"  required="true" requiredMessage="#{bundle.EditTipomasajeRequiredMessage_tipMasEst}">
+                            <f:selectItem itemValue="#{bundle.habilitadoValor}" itemLabel="#{bundle.habilitado}"/>
+                            <f:selectItem itemValue="#{bundle.deshabilitadoValor}" itemLabel="#{bundle.deshabilitado}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{bundle.EditTipomasajeLabel_tipMasImg}" for="tipMasImg" />
+                        <p:inputText id="tipMasImg" value="#{tipomasajeController.selected.tipMasImg}" title="#{bundle.EditTipomasajeTitle_tipMasImg}" required="true" requiredMessage="#{bundle.EditTipomasajeRequiredMessage_tipMasImg}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipomasajeController.update}" value="#{bundle.Save}" update="display,:TipomasajeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipomasajeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TipomasajeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

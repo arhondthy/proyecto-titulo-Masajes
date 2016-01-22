@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>
+    <h:body>
+        <h:form id="menuForm">
+            <div id="top" class="top">
+                <div id="logo" class="logo">
+                    <h:graphicImage library="Img" name="new_logo.jpg" width="200" height="80" />
+                </div>
+                <h:form id="ign">
+                    <div id="menu" class="menu">
+
+                        <p:menubar styleClass="menuBar">
+                            <p:menuitem value="#{bundle.Inicio}" outcome="/menuComun/Home" icon="ui-icon-home"/>
+                            <p:menuitem value="Masajes" outcome="/menuComun/Masajes.xhtml" />
+                            <p:menuitem value="Contacto" outcome="/menuComun/Contacto.xhtml" />
+                            <p:menuitem value="Ingreso" outcome="/menuComun/Ingreso.xhtml" rendered="#{login.usuario==null}"/>
+
+                            <f:facet name="options">
+<!--                                <p:outputLabel id="msj" value="Sesion iniciada por :   " rendered="#{login.usuario!=null}" />
+                                <p:outputLabel id="labelUserName" value="#{login.usuario.usuNomUsu}" rendered="#{login.usuario!=null}"/>-->
+                                <p:commandButton id="btnClose" value="Cerrar Sesion" action="#{login.logout()}"  rendered="#{login.usuario!=null}" update=":menuForm"/>
+                            </f:facet>
+
+                        </p:menubar>
+                        <p:menubar model="#{login.menuModel}" rendered="#{login.usuario!=null}" id="model" />
+                    </div>
+                </h:form>
+
+            </div>
+
+
+            <ui:insert name="top"></ui:insert>
+
+        </h:form>
+        <p:growl id="growl" sticky="false" showDetail="true" />
+       
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" >
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center" >
+                    <ui:insert name="body" id="body" class="body">
+
+                    </ui:insert>
+                </p:layoutUnit>
+
+
+
+            </p:layout>
+      
+
+    </h:body>
+</html>

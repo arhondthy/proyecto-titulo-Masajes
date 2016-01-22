@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MasajesprofesionalCreateDlg" widgetVar="MasajesprofesionalCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMasajesprofesionalTitle}">
+            <h:form id="MasajesprofesionalCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{masajesprofesionalController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMasajesprofesionalLabel_masProId}" for="masProId" />
+                        <p:inputText id="masProId" value="#{masajesprofesionalController.selected.masProId}" title="#{bundle.CreateMasajesprofesionalTitle_masProId}" required="true" requiredMessage="#{bundle.CreateMasajesprofesionalRequiredMessage_masProId}"/>
+                        <p:outputLabel value="#{bundle.CreateMasajesprofesionalLabel_masProCos}" for="masProCos" />
+                        <p:inputText id="masProCos" value="#{masajesprofesionalController.selected.masProCos}" title="#{bundle.CreateMasajesprofesionalTitle_masProCos}" required="true" requiredMessage="#{bundle.CreateMasajesprofesionalRequiredMessage_masProCos}"/>
+                        <p:outputLabel value="#{bundle.CreateMasajesprofesionalLabel_masProIdMas}" for="masProIdMas" />
+                        <p:selectOneMenu id="masProIdMas" value="#{masajesprofesionalController.selected.masProIdMas}" required="true" requiredMessage="#{bundle.EditMasajesprofesionalRequiredMessage_masProIdMas}">
+                            <f:selectItems value="#{tipomasajeController.itemsAvailableSelectOne}"
+                                           var="masProIdMasItem"
+                                           itemValue="#{masProIdMasItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateMasajesprofesionalLabel_masProIdPro}" for="masProIdPro" />
+                        <p:selectOneMenu id="masProIdPro" value="#{masajesprofesionalController.selected.masProIdPro}" required="true" requiredMessage="#{bundle.EditMasajesprofesionalRequiredMessage_masProIdPro}">
+                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                           var="masProIdProItem"
+                                           itemValue="#{masProIdProItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{masajesprofesionalController.create}" value="#{bundle.Save}" update="display,:MasajesprofesionalListForm:datalist,:growl" oncomplete="handleSubmit(args,'MasajesprofesionalCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MasajesprofesionalCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

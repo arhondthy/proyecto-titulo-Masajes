@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AgendacanceladaViewDlg" widgetVar="AgendacanceladaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAgendacanceladaTitle}">
+            <h:form id="AgendacanceladaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{agendacanceladaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAgendacanceladaLabel_ageCanId}"/>
+                        <h:outputText value="#{agendacanceladaController.selected.ageCanId}" title="#{bundle.ViewAgendacanceladaTitle_ageCanId}"/>
+                        <h:outputText value="#{bundle.ViewAgendacanceladaLabel_ageCanComId}"/>
+                        <h:outputText value="#{agendacanceladaController.selected.ageCanComId}" title="#{bundle.ViewAgendacanceladaTitle_ageCanComId}"/>
+                        <h:outputText value="#{bundle.ViewAgendacanceladaLabel_ageCanComCliId}"/>
+                        <h:outputText value="#{agendacanceladaController.selected.ageCanComCliId}" title="#{bundle.ViewAgendacanceladaTitle_ageCanComCliId}"/>
+                        <h:outputText value="#{bundle.ViewAgendacanceladaLabel_ageCanComCos}"/>
+                        <h:outputText value="#{agendacanceladaController.selected.ageCanComCos}" title="#{bundle.ViewAgendacanceladaTitle_ageCanComCos}"/>
+                        <h:outputText value="#{bundle.ViewAgendacanceladaLabel_ageCanComHor}"/>
+                        <h:outputText value="#{agendacanceladaController.selected.ageCanComHor}" title="#{bundle.ViewAgendacanceladaTitle_ageCanComHor}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAgendacanceladaLabel_ageCanComEst}"/>
+                        <h:outputText value="#{agendacanceladaController.selected.ageCanComEst}" title="#{bundle.ViewAgendacanceladaTitle_ageCanComEst}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AgendacanceladaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

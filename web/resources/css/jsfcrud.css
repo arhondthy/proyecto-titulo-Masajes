@@ -1,0 +1,70 @@
+.ui-widget {
+    font-size: 12px !important;
+}
+.ui-layout-north {
+    z-index: 20 !important;
+    overflow: visible !important;;
+}
+.ui-layout-north .ui-layout-unit-content {
+    overflow: visible !important;
+}
+.ui-widget-header {
+    text-align: center;
+    text-transform: uppercase;
+}
+.ui-button {
+    margin-top: 10px !important;
+}
+
+#top {
+    background-color: #990000;
+    box-shadow: 0px 2px 2px rgba(0 ,0 ,0, 0.7);
+    height:100px;
+    left:0px;
+    position: fixed;
+    top:0px;
+    width:100%;
+    z-index:1000;
+}
+#body{
+     background-color: #990000;
+     width:100%;
+     height:100%;
+}
+
+#divSessionUsuario{
+    position: fixed;
+    right: 10px;
+    top: 10px; 
+}
+
+#divSessionUsuario > span {
+    color: white;
+}
+#menuBar{
+    color: white;
+}
+#menu {
+    height:80px;
+    left:220px;
+    position: fixed;
+    top:10px;
+    width:50%;
+    z-index:1000;
+}
+#home {
+    left:300px;
+    position: fixed;
+    z-index:1000;
+}
+.ui-menubar   {
+    background-color: #d7944b !important; 
+    background: red;}
+#logo {
+    height:80px;
+    left:5px;
+    position: fixed;
+    top:10px;
+    width:50%;
+    z-index:1000;
+}

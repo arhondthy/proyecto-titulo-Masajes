@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PlanificacionprofesionalViewDlg" widgetVar="PlanificacionprofesionalViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPlanificacionprofesionalTitle}">
+            <h:form id="PlanificacionprofesionalViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{planificacionprofesionalController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPlanificacionprofesionalLabel_idplaPro}"/>
+                        <h:outputText value="#{planificacionprofesionalController.selected.idplaPro}" title="#{bundle.ViewPlanificacionprofesionalTitle_idplaPro}"/>
+                        <h:outputText value="#{bundle.ViewPlanificacionprofesionalLabel_plaDiaHorIni}"/>
+                        <h:outputText value="#{planificacionprofesionalController.selected.plaDiaHorIni}" title="#{bundle.ViewPlanificacionprofesionalTitle_plaDiaHorIni}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPlanificacionprofesionalLabel_plaDiaHorFin}"/>
+                        <h:outputText value="#{planificacionprofesionalController.selected.plaDiaHorFin}" title="#{bundle.ViewPlanificacionprofesionalTitle_plaDiaHorFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPlanificacionprofesionalLabel_plaHor}"/>
+                        <h:outputText value="#{planificacionprofesionalController.selected.plaHor}" title="#{bundle.ViewPlanificacionprofesionalTitle_plaHor}"/>
+                        <h:outputText value="#{bundle.ViewPlanificacionprofesionalLabel_plaUsuId}"/>
+                        <h:outputText value="#{planificacionprofesionalController.selected.plaUsuId}" title="#{bundle.ViewPlanificacionprofesionalTitle_plaUsuId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PlanificacionprofesionalViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

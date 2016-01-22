@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <body>
+        <ui:composition template="./../template/layoutMenu.xhtml">
+            <ui:define name="content">
+            </ui:define>
+            <ui:define name="body" >
+                <div id="home">
+
+                    <p:carousel id="slideShow"  numVisible="1"   effect="easeInStrong" circular="false" pageLinks="4" itemStyleClass="photo">
+                        <p:panel>
+                            <br><p:outputLabel value="Bienvenido al centro de estetica masSalud"/></br>
+                            <br></br>
+                            <p:graphicImage library="Img" name="new_logo.jpg" width="600" height="300"/>
+                        </p:panel>
+                        <p:panel>
+                            <br><p:outputLabel value="Distintas variedades de masajes"/></br>
+                            <br></br>
+                            <p:graphicImage library="Img" name="masaje1.jpg" width="600" height="300"/>
+                        </p:panel>
+                        <p:panel>
+                            <br><p:outputLabel value="Los mejores profesionales del bienestar"/></br>
+                            <br></br>
+                            <p:graphicImage library="Img" name="masaje2.jpg" width="600" height="300"/>
+                        </p:panel>
+                        <p:panel>
+                            <br><p:outputLabel value=" a los mejores precios"/></br>
+                            <br></br>
+                            <p:graphicImage library="Img" name="masaje3.jpg" width="600" height="300"/>
+                        </p:panel>
+                    </p:carousel>
+
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

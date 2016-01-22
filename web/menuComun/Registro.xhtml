@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../template/layoutMenu.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+
+
+    <ui:define name="body">
+        <p:growl id="MensajeErrorRegistro" sticky="true" showDetail="true"/>
+        <h:form id="UsuariosCreateForm" enctype="multipart/form-data">
+
+            <h2>Ingrese sus datos pára crear un usuario del sistema</h2>
+            <h:panelGroup id="display">
+                <p:panelGrid columns="2">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuNomUsu}" for="usuNomUsu" />
+                        <p:inputText id="usuNomUsu" value="#{usuariosController.selected.usuNomUsu}" title="#{bundle.CreateUsuariosTitle_usuNomUsu}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usuNomUsu}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuPas}" for="usuPas" />
+                        <p:password id="usuPas" value="#{usuariosController.selected.usuPas}" title="#{bundle.CreateUsuariosTitle_usuPas}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usuPas}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuNom}" for="usuNom" />
+                        <p:inputText id="usuNom" value="#{usuariosController.selected.usuNom}" title="#{bundle.CreateUsuariosTitle_usuNom}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usuNom}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuApe}" for="usuApe" />
+                        <p:inputText id="usuApe" value="#{usuariosController.selected.usuApe}" title="#{bundle.CreateUsuariosTitle_usuApe}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usuApe}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuDir}" for="usuDir" />
+                        <p:inputText id="usuDir" value="#{usuariosController.selected.usuDir}" title="#{bundle.CreateUsuariosTitle_usuDir}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usuDir}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuCom}" for="usuCom" />
+                        <p:selectOneMenu id="usuCom" value="#{usuariosController.selected.usuCom}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_usuTipUsuId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{comunaController.items}"
+                                           var="comuna"
+                                           itemValue="#{comuna.comNom}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuRut}" for="usuRut" />
+                        <p:inputText id="usuRut" value="#{usuariosController.selected.usuRut}" title="#{bundle.CreateUsuariosTitle_usuRut}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usuRut}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuTel}" for="usuTel" />
+                        <p:inputText id="usuTel" value="#{usuariosController.selected.usuTel}" title="#{bundle.CreateUsuariosTitle_usuTel}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usuTel}"/>
+                        <p:outputLabel value="Correo de usuario" for="usuMail" />
+                        <p:inputText id="usuMail" value="#{usuariosController.selected.usuMail}"  required="true" requiredMessage="Correo de usuario es obligatorio"/>
+                        
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuSex}" for="usuSex" />
+
+                        <p:selectOneRadio id="usuSex" value="#{usuariosController.selected.usuSex}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_usuTipUsuId}">
+                            <f:selectItem itemValue="#{bundle.FemeninoValor}" itemLabel="#{bundle.Femenino}"/>
+                            <f:selectItem itemValue="#{bundle.MasculinoValor}" itemLabel="#{bundle.Masculino}"/>
+                        </p:selectOneRadio>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuFec}" for="usuFec" />
+                        <p:calendar id="usuFec" pattern="dd/MM/yyyy" value="#{usuariosController.selected.usuFec}" title="#{bundle.EditUsuariosTitle_usuFec}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_usuFec}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuTipUsuId}" for="usuTipUsuId" />
+                        <p:selectOneMenu id="usuTipUsuId" value="#{usuariosController.selected.usuTipUsuId}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_usuTipUsuId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipousuarioController.paraRegistro}"
+                                           var="usuTipUsuIdItem"
+                                           itemValue="#{usuTipUsuIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    
+                   
+                </p:panelGrid>
+               
+                <p:commandButton actionListener="#{usuariosController.guardarNuevoRegisto()}" value="#{bundle.Save}"/>
+
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

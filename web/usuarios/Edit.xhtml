@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuariosEditDlg" widgetVar="UsuariosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUsuariosTitle}">
+            <h:form id="UsuariosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuariosController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_usuNomUsu}" for="usuNomUsu" />
+                        <p:inputText id="usuNomUsu" value="#{usuariosController.selected.usuNomUsu}" title="#{bundle.EditUsuariosTitle_usuNomUsu}" />
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_usuEst}" for="usuEst" />
+                        <p:selectOneRadio id="usuEst" value="#{usuariosController.selected.usuEst}"  required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_usuEst}">
+
+                            <f:selectItem itemValue="#{bundle.habilitadoValor}" itemLabel="#{bundle.habilitado}"/>
+                            <f:selectItem itemValue="#{bundle.deshabilitadoValor}" itemLabel="#{bundle.deshabilitado}"/>
+                        </p:selectOneRadio>
+
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_usuNom}" for="usuNom" />
+                        <p:inputText id="usuNom" value="#{usuariosController.selected.usuNom}" title="#{bundle.EditUsuariosTitle_usuNom}" />
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_usuApe}" for="usuApe" />
+                        <p:inputText id="usuApe" value="#{usuariosController.selected.usuApe}" title="#{bundle.EditUsuariosTitle_usuApe}" />
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_usuDir}" for="usuDir" />
+                        <p:inputText id="usuDir" value="#{usuariosController.selected.usuDir}" title="#{bundle.EditUsuariosTitle_usuDir}" />
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_usuCom}" for="usuCom" />
+
+                        <p:selectOneMenu id="usuCom" value="#{usuariosController.selected.usuCom}" required="true" requiredMessage="#{bundle.EditUsuariosTitle_usuCom}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{comunaController.itemsAvailableSelectOne}"
+                                           var="usuComu"
+                                           itemValue="#{usuComu}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_usuRut}" for="usuRut" />
+                        <p:inputText id="usuRut" value="#{usuariosController.selected.usuRut}" title="#{bundle.EditUsuariosTitle_usuRut}" />
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_usuTel}" for="usuTel" />
+                        <p:inputText id="usuTel" value="#{usuariosController.selected.usuTel}" title="#{bundle.EditUsuariosTitle_usuTel}"/>
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_usuSex}" for="usuSex" />
+
+                        <p:selectOneRadio id="usuSex" value="#{usuariosController.selected.usuSex}"  required="true" requiredMessage="#{bundle.EditUsuariosTitle_usuSex}">
+                            <f:selectItem itemValue="#{bundle.FemeninoValor}" itemLabel="#{bundle.Femenino}"/>
+                            <f:selectItem itemValue="#{bundle.MasculinoValor}" itemLabel="#{bundle.Masculino}"/>
+                        </p:selectOneRadio>
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_usuFec}" for="usuFec" />
+                        <p:outputLabel id="usuFec"  value="#{usuariosController.selected.usuFec}" title="#{bundle.EditUsuariosTitle_usuFec}" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </p:outputLabel>
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_usuTipUsuId}" for="usuTipUsuId" />
+                        <p:selectOneMenu id="usuTipUsuId" value="#{usuariosController.selected.usuTipUsuId}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_usuTipUsuId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipousuarioController.itemsAvailableSelectOne}"
+                                           var="usuTipUsuIdItem"
+                                           itemValue="#{usuTipUsuIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Correo de usuario" for="usuMail" />
+                        <p:inputText id="usuMail" value="#{usuariosController.selected.usuMail}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuariosController.update}" value="#{bundle.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuariosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuariosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

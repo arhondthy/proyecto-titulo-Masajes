@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompramasajeEditDlg" widgetVar="CompramasajeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCompramasajeTitle}">
+            <h:form id="CompramasajeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{compramasajeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCompramasajeLabel_comMasId}" for="comMasId" />
+                        <p:inputText id="comMasId" value="#{compramasajeController.selected.comMasId}" title="#{bundle.EditCompramasajeTitle_comMasId}" required="true" requiredMessage="#{bundle.EditCompramasajeRequiredMessage_comMasId}"/>
+                        <p:outputLabel value="#{bundle.EditCompramasajeLabel_comMasCliId}" for="comMasCliId" />
+                        <p:inputText id="comMasCliId" value="#{compramasajeController.selected.comMasCliId}" title="#{bundle.EditCompramasajeTitle_comMasCliId}" required="true" requiredMessage="#{bundle.EditCompramasajeRequiredMessage_comMasCliId}"/>
+                        <p:outputLabel value="#{bundle.EditCompramasajeLabel_comMasCos}" for="comMasCos" />
+                        <p:inputText id="comMasCos" value="#{compramasajeController.selected.comMasCos}" title="#{bundle.EditCompramasajeTitle_comMasCos}" required="true" requiredMessage="#{bundle.EditCompramasajeRequiredMessage_comMasCos}"/>
+                        <p:outputLabel value="#{bundle.EditCompramasajeLabel_comMasHor}" for="comMasHor" />
+                        <p:calendar id="comMasHor" pattern="MM/dd/yyyy HH:mm:ss" value="#{compramasajeController.selected.comMasHor}" title="#{bundle.EditCompramasajeTitle_comMasHor}" required="true" requiredMessage="#{bundle.EditCompramasajeRequiredMessage_comMasHor}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditCompramasajeLabel_comMasTipMasNom}" for="comMasTipMasNom" />
+                        <p:selectOneMenu id="comMasTipMasNom" value="#{compramasajeController.selected.comMasTipMasNom}" required="true" requiredMessage="#{bundle.EditCompramasajeRequiredMessage_comMasTipMasNom}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipomasajeController.itemsAvailableSelectOne}"
+                                           var="comMasTipMasNomItem"
+                                           itemValue="#{comMasTipMasNomItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditCompramasajeLabel_comMasProId}" for="comMasProId" />
+                        <p:selectOneMenu id="comMasProId" value="#{compramasajeController.selected.comMasProId}" required="true" requiredMessage="#{bundle.EditCompramasajeRequiredMessage_comMasProId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                           var="comMasProIdItem"
+                                           itemValue="#{comMasProIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{compramasajeController.update}" value="#{bundle.Save}" update="display,:CompramasajeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CompramasajeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CompramasajeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

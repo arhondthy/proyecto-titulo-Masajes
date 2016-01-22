@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PlanificacionprofesionalCreateDlg" widgetVar="PlanificacionprofesionalCreateDialog" modal="true" resizable="false" closable="false" appendTo="@(body)" header="Crear nueva planificacion">
+            <h:form id="PlanificacionprofesionalCreateForm">
+                <h:outputScript library="js" name="calendar_es.js" />
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{planificacionprofesionalController.selected != null}">
+                        <p:outputLabel value="Fecha de Inicio" for="plaDiaHorIni" />
+                        <p:calendar id="plaDiaHorIni" pattern="dd/MM/yyyy" mindate="#{planificacionprofesionalController.actual}" value="#{planificacionprofesionalController.selected.plaDiaHorIni}" locale="es" title="#{bundle.EditPlanificacionprofesionalTitle_plaDiaHorIni}" required="true" requiredMessage="#{bundle.EditPlanificacionprofesionalRequiredMessage_plaDiaHorIni}" showOn="button"/>
+                        <p:outputLabel value="Fecha de Termino" for="plaDiaHorFin" />
+                        <p:calendar id="plaDiaHorFin" pattern="dd/MM/yyyy"  mindate="#{planificacionprofesionalController.actual}" value="#{planificacionprofesionalController.selected.plaDiaHorFin}"  locale="es" title="#{bundle.EditPlanificacionprofesionalTitle_plaDiaHorFin}" required="true" requiredMessage="#{bundle.EditPlanificacionprofesionalRequiredMessage_plaDiaHorFin}" showOn="button"/>
+                        <p:outputLabel value="Horas de trabajo diarias"  />
+                        <p:panelGrid columns="1" style="margin-bottom: 10px">                           
+                            <h:outputText id="output" value="#{planificacionprofesionalController.selected.plaHor}" />
+                            <h:inputHidden id="txt2" value="#{planificacionprofesionalController.selected.plaHor}" required="true" requiredMessage="Debe ingresar cantidad de horas" />
+                            <p:slider for="txt2" display="output" style="width: 130px"  step="1"  maxValue="8" minValue="1"/>
+                        </p:panelGrid>
+
+                    </p:panelGrid>
+
+                    <p:commandButton actionListener="#{planificacionprofesionalController.nuevaPlanificacion()}" value="#{bundle.Save}" update="display,:PlanificacionprofesionalListForm ,:growl" oncomplete="handleSubmit(args,'PlanificacionprofesionalCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PlanificacionprofesionalCreateDlg.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

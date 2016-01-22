@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./../template/layoutMenu.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPlanificacionprofesionalTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <p:growl id="msgsPlani" showDetail="true" />
+            <h:form id="PlanificacionprofesionalListForm">
+
+                <p:tabView orientation="left">
+                    <p:ajax event="tabChange" listener="#{vistaTabs.CambioTab}" update=":PlanificacionprofesionalListForm :msgsPlani"/>
+                    <p:ajax event="tabClose" listener="#{vistaTabs.CierreTab}" update=":PlanificacionprofesionalListForm :msgsPlani"/>
+                    <p:tab title="Planificacion">
+                        <p:panel header="Mis planificaciones">
+                            <p:dataTable id="datalistPlani" value="#{planificacionprofesionalController.planificacionnes}" var="item"
+                                         selectionMode="single" selection="#{planificacionprofesionalController.selected}"
+                                         rowKey="#{item.idplaPro}"
+                                         emptyMessage="#{bundle.tablaVacia}"
+                                         >
+
+                                <p:ajax event="rowSelect"   update="createButton editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update="createButton editButton deleteButton"/>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Planificaciones"/>
+                                    </f:facet>
+                                    <br>    <h:outputText value="Fecha de inicio:  "/>
+                                        <h:outputText value="#{item.plaDiaHorIni}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:outputText></br>
+                                    <br> <h:outputText value="Fecha de termino:  "/>
+                                        <h:outputText value="#{item.plaDiaHorFin}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:outputText></br>
+                                    <br> <h:outputText value="Horas de trabajo:  "/>
+                                        <h:outputText value="#{item.plaHor}"/></br>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear Nueva" actionListener="#{planificacionprofesionalController.prepareCreate}" update=":PlanificacionprofesionalCreateForm" oncomplete="PF('PlanificacionprofesionalCreateDialog').show()"/>
+                                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Editar" update=":PlanificacionprofesionalEditForm" oncomplete="PF('PlanificacionprofesionalEditDialog').show()" disabled="#{empty planificacionprofesionalController.selected}"/>
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Eliminar" actionListener="#{planificacionprofesionalController.destroy}" update=":growl,datalistPlani" disabled="#{empty planificacionprofesionalController.selected}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab title="Bloqueo">
+                        <p:panel header="Dias Habilitados y Bloqueados">
+                            <p:dataTable id="datalistBloq" value="#{bloqueosplanificacionController.bloqProTO}" var="itemBlo"
+                                         selectionMode="single" selection="#{bloqueosplanificacionController.bloqueoSelected}"  rowKey="#{itemBlo.proId}"
+                                         emptyMessage="#{bundle.tablaVaciaBloqueos}">
+
+                                <p:ajax event="rowSelect"   update="crearBloqBtn  delBloqBtn"/>
+                                <p:ajax event="rowUnselect" update="crearBloqBtn  delBloqBtn"/>
+                                <p:column>
+
+                                    <br> 
+                                        <p:outputLabel value="Lunes Bloqueado" rendered="#{itemBlo.lunes == 2}"/>
+                                        <p:outputLabel value="Lunes Habilitado" rendered="#{empty itemBlo.lunes}"/>
+                                    </br>
+                                    <br> 
+                                        <p:outputLabel value="Martes Bloqueado" rendered="#{itemBlo.martes == 3}"/>
+                                        <p:outputLabel value="Martes Habilitado" rendered="#{empty itemBlo.martes}"/>
+                                    </br>
+                                    <br>   
+                                        <p:outputLabel value="Miercoles Bloqueado" rendered="#{itemBlo.miercoles== 4}"/>
+                                        <p:outputLabel value="Miercoles Habilitado" rendered="#{empty itemBlo.miercoles}"/>
+
+                                    </br>
+                                    <br>   
+                                        <p:outputLabel value="Jueves Bloqueado" rendered="#{itemBlo.jueves== 5}"/>
+                                        <p:outputLabel value="Jueves Habilitado" rendered="#{empty itemBlo.jueves}"/>
+
+                                    </br>
+                                    <br>    
+                                        <p:outputLabel value="Viernes Bloqueado" rendered="#{itemBlo.viernes== 6}"/>
+                                        <p:outputLabel value="Viernes Habilitado" rendered="#{empty itemBlo.viernes}"/>
+                                    </br>
+
+                                    <br> 
+                                        <p:outputLabel value="Sabado Bloqueado" rendered="#{itemBlo.sabado== 7}"/>
+                                        <p:outputLabel value="Sabado Habilitado" rendered="#{empty itemBlo.sabado}"/>
+                                    </br>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <p:commandButton id="crearBloqBtn" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{bloqueosplanificacionController.cargarCrear()}" update=":PlanificacionprofesionalListForm" oncomplete="PF('BloqueosplanificacionCreateDialog').show()" />
+
+                                    <p:commandButton id="delBloqBtn" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{bloqueosplanificacionController.eliminar()}" update=":growl,datalistBloq" disabled="#{empty bloqueosplanificacionController.bloqueoSelected}"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </p:panel>
+
+                    </p:tab>
+                </p:tabView>
+            </h:form>
+
+            <ui:include src="CrearPlanificacion.xhtml"/>
+            <ui:include src="EditarPlanificacion.xhtml"/>
+            <ui:include src="CrearBloqueo.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

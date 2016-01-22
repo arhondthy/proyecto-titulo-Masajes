@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MasajesprofesionalViewDlg" widgetVar="MasajesprofesionalViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMasajesprofesionalTitle}">
+            <h:form id="MasajesprofesionalViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{masajesprofesionalController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMasajesprofesionalLabel_masProId}"/>
+                        <h:outputText value="#{masajesprofesionalController.selected.masProId}" title="#{bundle.ViewMasajesprofesionalTitle_masProId}"/>
+                        <h:outputText value="#{bundle.ViewMasajesprofesionalLabel_masProCos}"/>
+                        <h:outputText value="#{masajesprofesionalController.selected.masProCos}" title="#{bundle.ViewMasajesprofesionalTitle_masProCos}"/>
+                        <h:outputText value="#{bundle.ViewMasajesprofesionalLabel_masProIdMas}"/>
+                        <h:outputText value="#{masajesprofesionalController.selected.masProIdMas}" title="#{bundle.ViewMasajesprofesionalTitle_masProIdMas}"/>
+                        <h:outputText value="#{bundle.ViewMasajesprofesionalLabel_masProIdPro}"/>
+                        <h:outputText value="#{masajesprofesionalController.selected.masProIdPro}" title="#{bundle.ViewMasajesprofesionalTitle_masProIdPro}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MasajesprofesionalViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuariosViewDlg" widgetVar="UsuariosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUsuariosTitle}">
+            <h:form id="UsuariosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuariosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuId}"/>
+                        <h:outputText value="#{usuariosController.selected.usuId}" title="#{bundle.ViewUsuariosTitle_usuId}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuNomUsu}"/>
+                        <h:outputText value="#{usuariosController.selected.usuNomUsu}" title="#{bundle.ViewUsuariosTitle_usuNomUsu}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuEst}"/>
+                        <h:outputText value="#{usuariosController.selected.usuEst}" title="#{bundle.ViewUsuariosTitle_usuEst}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuPas}"/>
+                        <h:outputText value="#{usuariosController.selected.usuPas}" title="#{bundle.ViewUsuariosTitle_usuPas}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuNom}"/>
+                        <h:outputText value="#{usuariosController.selected.usuNom}" title="#{bundle.ViewUsuariosTitle_usuNom}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuApe}"/>
+                        <h:outputText value="#{usuariosController.selected.usuApe}" title="#{bundle.ViewUsuariosTitle_usuApe}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuDir}"/>
+                        <h:outputText value="#{usuariosController.selected.usuDir}" title="#{bundle.ViewUsuariosTitle_usuDir}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuCom}"/>
+                        <h:outputText value="#{usuariosController.selected.usuCom}" title="#{bundle.ViewUsuariosTitle_usuCom}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuRut}"/>
+                        <h:outputText value="#{usuariosController.selected.usuRut}" title="#{bundle.ViewUsuariosTitle_usuRut}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuTel}"/>
+                        <h:outputText value="#{usuariosController.selected.usuTel}" title="#{bundle.ViewUsuariosTitle_usuTel}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuSex}"/>
+                        <h:outputText value="#{usuariosController.selected.usuSex}" title="#{bundle.ViewUsuariosTitle_usuSex}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuFec}"/>
+                        <h:outputText value="#{usuariosController.selected.usuFec}" title="#{bundle.ViewUsuariosTitle_usuFec}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuTipUsuId}"/>
+                        <h:outputText value="#{usuariosController.selected.usuTipUsuId}" title="#{bundle.ViewUsuariosTitle_usuTipUsuId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UsuariosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

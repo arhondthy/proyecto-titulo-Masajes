@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MenuCreateDlg" widgetVar="MenuCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMenuTitle}">
+            <h:form id="MenuCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{menuController.selected != null}">
+                         <p:outputLabel value="#{bundle.CreateMenuLabel_menNom}" for="menNom" />
+                        <p:inputText id="menNom" value="#{menuController.selected.menNom}" title="#{bundle.CreateMenuTitle_menNom}" required="true" requiredMessage="#{bundle.CreateMenuRequiredMessage_menNom}"/>
+                        <p:outputLabel value="#{bundle.CreateMenuLabel_menXhtml}" for="menXhtml" />
+                        <p:inputText id="menXhtml" value="#{menuController.selected.menXhtml}" title="#{bundle.CreateMenuTitle_menXhtml}" required="true" requiredMessage="#{bundle.CreateMenuRequiredMessage_menXhtml}"/>
+                        <p:outputLabel value="#{bundle.CreateMenuLabel_mentipoUserid}" for="mentipoUserid" />
+                        <p:selectOneMenu id="mentipoUserid" value="#{menuController.selected.mentipoUserid}" required="true" requiredMessage="#{bundle.EditMenuRequiredMessage_mentipoUserid}">
+                            <f:selectItems value="#{tipousuarioController.itemsAvailableSelectOne}"
+                                           var="mentipoUseridItem"
+                                           itemValue="#{mentipoUseridItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{menuController.create}" value="#{bundle.Save}" update="display,:MenuListForm:datalist,:growl" oncomplete="handleSubmit(args,'MenuCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MenuCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

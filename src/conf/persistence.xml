@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="MasajesPU" transaction-type="JTA">
+    <jta-data-source>jdbc/portal__pm</jta-data-source>
+    <class>entidades.Compramasaje</class>
+    <class>entidades.Comuna</class>
+    <class>entidades.Comunasprofesional</class>
+    <class>entidades.Contacto</class>
+    <class>entidades.Masajesprofesional</class>
+    <class>entidades.Menu</class>
+    <class>entidades.Planificacionprofesional</class>
+    <class>entidades.Rating</class>
+    <class>entidades.Tipomasaje</class>
+    <class>entidades.Tipousuario</class>
+    <class>entidades.Usuarios</class>
+    <class>entidades.Agendacancelada</class>
+    <class>entidades.Bloqueosplanificacion</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+  </persistence-unit>
+</persistence>

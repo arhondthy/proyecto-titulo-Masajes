@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layoutMenu.xhtml">
+
+            <ui:define name="body">
+
+                <p:growl id="MensajeErrorAgenda" sticky="true" showDetail="true"/>
+                <h:form id="formGuardarMasaje">
+                    <h:outputScript library="js" name="calendar_es.js" />
+                    <h2>Seleccione dia,hora y profesional que realizara su atencion </h2>
+                    <p:panel header="Detalle atencion solicitada">
+                        <p:panelGrid columns="2" >
+                            <p:graphicImage library="Img" name="#{tipomasajeController.selected.tipMasImg}" width="300" height="150"/>
+                            <p:panel>
+                                <p:panelGrid columns="2" >
+                                    <p:outputLabel value="Masaje seleccionado:" for="nomMasaje"/>
+                                    <p:outputLabel id="nomMasaje" value="#{tipomasajeController.selected.tipMasNom}"/>
+                                    <p:outputLabel value="Costo Masajes:"/>
+                                    <p:outputLabel value="#{tipomasajeController.selected.tipMasCos}"/>
+                                    <p:outputLabel value="Seleccione profesional" />
+                                    <p:selectOneMenu id="selectPro" value="#{tipomasajeController.profesionalId}"  required="true" requiredMessage="Seleccione profesional" > 
+                                        <p:ajax listener="#{tipomasajeController.cargarPlanificacionByPro}" update="selectdia rating"  />
+                                        <f:selectItem itemLabel="Seleccione"/> 
+                                        <f:selectItems value="#{tipomasajeController.masajesByProfesional}" var="byPro" itemLabel="#{byPro.masProIdPro}" itemValue="#{byPro.masProIdPro}"  />
+                                    </p:selectOneMenu>
+                                    <h:outputText value="Rating del profesional" />
+                                    <p:rating id="rating" value="#{tipomasajeController.ratingByPro}" readonly="true" />
+                                    <p:outputLabel value="Nombre Dia seleccionado" />
+                                    <p:outputLabel id="nombreDia" value="#{tipomasajeController.nombreDia}" />
+                                    <p:outputLabel value="Seleccione Dia" />
+                                    <p:selectOneMenu id="selectdia" value="#{tipomasajeController.dia}"  required="true" requiredMessage="Seleccione Dia" > 
+                                        <p:ajax listener="#{tipomasajeController.cargarHoras()}" update="selecthora nombreDia" />
+                                        <f:selectItem itemLabel="Seleccione dia"/> 
+                                        <f:selectItems value="#{tipomasajeController.listaFechas}" var="dias"  itemValue="#{dias}"  />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="Seleccione Hora" />
+                                    <p:selectOneMenu id="selecthora" value="#{tipomasajeController.hora}"  required="true" requiredMessage="Seleccione Hora" > 
+                                        <f:selectItem itemLabel="Seleccione Hora"/> 
+                                        <f:selectItems value="#{tipomasajeController.listaHoras}" var="horas"  itemValue="#{horas}"  />
+                                    </p:selectOneMenu>
+
+
+                                </p:panelGrid>
+                                <p:commandButton id="btnSolicitar" value="Realizar solicitud" actionListener="#{tipomasajeController.guardarAgendaMasaje()}" update="formGuardarMasaje,:MensajeErrorAgenda" />
+                            </p:panel>
+                        </p:panelGrid>
+
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+

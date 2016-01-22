@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ComunaEditDlg" widgetVar="ComunaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditComunaTitle}">
+            <h:form id="ComunaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{comunaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditComunaLabel_comId}" for="comId" />
+                        <p:inputText id="comId" value="#{comunaController.selected.comId}" title="#{bundle.EditComunaTitle_comId}" required="true" requiredMessage="#{bundle.EditComunaRequiredMessage_comId}"/>
+                        <p:outputLabel value="#{bundle.EditComunaLabel_comNom}" for="comNom" />
+                        <p:inputText id="comNom" value="#{comunaController.selected.comNom}" title="#{bundle.EditComunaTitle_comNom}" required="true" requiredMessage="#{bundle.EditComunaRequiredMessage_comNom}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{comunaController.update}" value="#{bundle.Save}" update="display,:ComunaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ComunaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ComunaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

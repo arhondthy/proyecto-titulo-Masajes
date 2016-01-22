@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BloqueosplanificacionCreateDlg" widgetVar="BloqueosplanificacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" closable="false" header="#{bundle.CreateBloqueosplanificacionTitle}">
+            <h:form id="BloqueosplanificacionCreateForm">
+                <h:panelGroup id="display">
+                    <h2>Seleccione los dias que seran bloqueados</h2>
+                    <p:panelGrid columns="2" >
+                        <p:selectManyCheckbox id="bloDia" value="#{bloqueosplanificacionController.diasBloqueados}" layout="grid" columns="2">
+                            <f:selectItem  itemLabel="Lunes" itemValue="1" />
+                            <f:selectItem  itemLabel="martes" itemValue="2" />
+                            <f:selectItem  itemLabel="Miercoles" itemValue="3" />
+                            <f:selectItem  itemLabel="Jueves" itemValue="4" />
+                            <f:selectItem  itemLabel="Viernes" itemValue="5" />
+                            <f:selectItem  itemLabel="Sabado" itemValue="6" />                         
+                        </p:selectManyCheckbox>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bloqueosplanificacionController.guardarBloqueo()}" value="Guardar" update="display,:PlanificacionprofesionalListForm,:growl" oncomplete="handleSubmit(args,'BloqueosplanificacionCreateDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="BloqueosplanificacionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ContactoCreateDlg" widgetVar="ContactoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateContactoTitle}">
+            <h:form id="ContactoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{contactoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateContactoLabel_conId}" for="conId" />
+                        <p:inputText id="conId" value="#{contactoController.selected.conId}" title="#{bundle.CreateContactoTitle_conId}" required="true" requiredMessage="#{bundle.CreateContactoRequiredMessage_conId}"/>
+                        <p:outputLabel value="#{bundle.CreateContactoLabel_conNom}" for="conNom" />
+                        <p:inputText id="conNom" value="#{contactoController.selected.conNom}" title="#{bundle.CreateContactoTitle_conNom}" required="true" requiredMessage="#{bundle.CreateContactoRequiredMessage_conNom}"/>
+                        <p:outputLabel value="#{bundle.CreateContactoLabel_conMail}" for="conMail" />
+                        <p:inputText id="conMail" value="#{contactoController.selected.conMail}" title="#{bundle.CreateContactoTitle_conMail}" required="true" requiredMessage="#{bundle.CreateContactoRequiredMessage_conMail}"/>
+                        <p:outputLabel value="#{bundle.CreateContactoLabel_conMsj}" for="conMsj" />
+                        <p:inputText id="conMsj" value="#{contactoController.selected.conMsj}" title="#{bundle.CreateContactoTitle_conMsj}" required="true" requiredMessage="#{bundle.CreateContactoRequiredMessage_conMsj}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{contactoController.create}" value="#{bundle.Save}" update="display,:ContactoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ContactoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ContactoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

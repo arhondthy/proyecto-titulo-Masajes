@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./../template/layoutMenu.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListUsuariosTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="UsuariosListForm">
+                <p:panel header="Mis datos">
+                    <p:dataTable id="datalist" value="#{usuariosController.misDatos}" var="item"
+                                 selectionMode="single" selection="#{usuariosController.miUsuario}"
+                                 rowKey="#{item.usuId}">
+                        <p:column>
+                            <br>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usuNomUsu}: "/>
+                                <h:outputText value="#{item.usuNomUsu}"/>
+                            </br>
+                            <br>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usuEst}: "/>
+                                <h:outputText value="#{item.usuEst==bundle.habilitadoValor?bundle.habilitado:bundle.deshabilitado}"/>
+                            </br>
+                            <br>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usuPas}: "/>
+                                <h:outputText value="#{item.usuPas}"/>
+                            </br>
+                            <br>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usuNom}: "/>
+                                <h:outputText value="#{item.usuNom}"/>
+                            </br>
+                            <br>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usuApe}: "/>
+                                <h:outputText value="#{item.usuApe}"/>
+                            </br>
+                            <br>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usuDir}: "/>
+                                <h:outputText value="#{item.usuDir}"/>
+                            </br>
+                            <br>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usuCom}: "/>
+                                <h:outputText value="#{item.usuCom}"/>
+                            </br>
+                            <br>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usuRut}: "/>
+                                <h:outputText value="#{item.usuRut}"/>
+                            </br>
+                            <br>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usuTel}: "/>
+                                <h:outputText value="#{item.usuTel}"/>
+                            </br>
+                            <br>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usuSex}: "/>
+                                <h:outputText value="#{item.usuSex==bundle.MasculinoValor?bundle.Masculino:bundle.Femenino}"/>
+                            </br>
+                            <br>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usuFec}: "/>
+                                <h:outputText value="#{item.usuFec}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </br>
+                            <br>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_usuMail}: "/>
+                                <h:outputText value="#{item.usuMail}"/>
+                            </br>
+                            <!--<p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{usuariosController.cargarEditar(item)}" />-->
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+      
+        </ui:define>
+    </ui:composition>
+
+</html>

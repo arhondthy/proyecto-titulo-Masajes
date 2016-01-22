@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PlanificacionprofesionalEditDlg" widgetVar="PlanificacionprofesionalEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPlanificacionprofesionalTitle}">
+            <h:form id="PlanificacionprofesionalEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{planificacionprofesionalController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPlanificacionprofesionalLabel_idplaPro}" for="idplaPro" />
+                        <p:inputText id="idplaPro" value="#{planificacionprofesionalController.selected.idplaPro}" title="#{bundle.EditPlanificacionprofesionalTitle_idplaPro}" required="true" requiredMessage="#{bundle.EditPlanificacionprofesionalRequiredMessage_idplaPro}"/>
+                        <p:outputLabel value="#{bundle.EditPlanificacionprofesionalLabel_plaDiaHorIni}" for="plaDiaHorIni" />
+                        <p:calendar id="plaDiaHorIni" pattern="MM/dd/yyyy HH:mm:ss" value="#{planificacionprofesionalController.selected.plaDiaHorIni}" title="#{bundle.EditPlanificacionprofesionalTitle_plaDiaHorIni}" required="true" requiredMessage="#{bundle.EditPlanificacionprofesionalRequiredMessage_plaDiaHorIni}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPlanificacionprofesionalLabel_plaDiaHorFin}" for="plaDiaHorFin" />
+                        <p:calendar id="plaDiaHorFin" pattern="MM/dd/yyyy HH:mm:ss" value="#{planificacionprofesionalController.selected.plaDiaHorFin}" title="#{bundle.EditPlanificacionprofesionalTitle_plaDiaHorFin}" required="true" requiredMessage="#{bundle.EditPlanificacionprofesionalRequiredMessage_plaDiaHorFin}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPlanificacionprofesionalLabel_plaHor}" for="plaHor" />
+                        <p:inputText id="plaHor" value="#{planificacionprofesionalController.selected.plaHor}" title="#{bundle.EditPlanificacionprofesionalTitle_plaHor}" required="true" requiredMessage="#{bundle.EditPlanificacionprofesionalRequiredMessage_plaHor}"/>
+                        <p:outputLabel value="#{bundle.EditPlanificacionprofesionalLabel_plaUsuId}" for="plaUsuId" />
+                        <p:selectOneMenu id="plaUsuId" value="#{planificacionprofesionalController.selected.plaUsuId}" required="true" requiredMessage="#{bundle.EditPlanificacionprofesionalRequiredMessage_plaUsuId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                           var="plaUsuIdItem"
+                                           itemValue="#{plaUsuIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{planificacionprofesionalController.update}" value="#{bundle.Save}" update="display,:PlanificacionprofesionalListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PlanificacionprofesionalEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PlanificacionprofesionalEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

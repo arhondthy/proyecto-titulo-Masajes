@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layoutMenu.xhtml">
+
+            <ui:define name="body">
+
+                <h:form id="TipomasajeByProfesionalForm">
+                    <p:panel header="Masajes asociados a mi perfil profesional">
+                        <p:dataTable id="datalist" value="#{masajesprofesionalController.misMasajes}" var="item"
+                                     paginator="true"
+                                     selectionMode="single" selection="#{masajesprofesionalController.selected}"
+                                     rowKey="#{item.masProId}"
+                                     rows="5"
+                                     >
+                            <p:ajax event="rowSelect"   update="createButton deleteButton"/>
+                            <p:ajax event="rowUnselect" update="createButton deleteButton"/>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"/>
+                                </f:facet>
+                                <h:outputText value="#{item.masProIdMas.tipMasNom}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Descripcion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.masProIdMas.tipMasDes}"/>
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="Agregar masaje" actionListener="#{masajesprofesionalController.prepareCreate}" update=":PlanificacionprofesionalCreateForm" oncomplete="PF('PlanificacionprofesionalAddMasajeDialog').show()"/>
+                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Eliminar masaje asociado" actionListener="#{masajesprofesionalController.destroy}" update=":growl,datalist" disabled="#{empty masajesprofesionalController.selected}"/>
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+                <ui:include src="agregarMasaje.xhtml"/>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

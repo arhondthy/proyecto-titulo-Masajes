@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompramasajeViewDlg" widgetVar="CompramasajeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCompramasajeTitle}">
+            <h:form id="CompramasajeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{compramasajeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCompramasajeLabel_comMasId}"/>
+                        <h:outputText value="#{compramasajeController.selected.comMasId}" title="#{bundle.ViewCompramasajeTitle_comMasId}"/>
+                        <h:outputText value="#{bundle.ViewCompramasajeLabel_comMasCliId}"/>
+                        <h:outputText value="#{compramasajeController.selected.comMasCliId}" title="#{bundle.ViewCompramasajeTitle_comMasCliId}"/>
+                        <h:outputText value="#{bundle.ViewCompramasajeLabel_comMasCos}"/>
+                        <h:outputText value="#{compramasajeController.selected.comMasCos}" title="#{bundle.ViewCompramasajeTitle_comMasCos}"/>
+                        <h:outputText value="#{bundle.ViewCompramasajeLabel_comMasHor}"/>
+                        <h:outputText value="#{compramasajeController.selected.comMasHor}" title="#{bundle.ViewCompramasajeTitle_comMasHor}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCompramasajeLabel_comMasTipMasNom}"/>
+                        <h:outputText value="#{compramasajeController.selected.comMasTipMasNom}" title="#{bundle.ViewCompramasajeTitle_comMasTipMasNom}"/>
+                        <h:outputText value="#{bundle.ViewCompramasajeLabel_comMasProId}"/>
+                        <h:outputText value="#{compramasajeController.selected.comMasProId}" title="#{bundle.ViewCompramasajeTitle_comMasProId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CompramasajeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
